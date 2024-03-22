@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score
 # Load the titanic dataset
 titanic_data = sns.load_dataset('titanic')
 
-# display(titanic_data[['survived','pclass', 'sex', 'age', 'sibsp', 'parch', 'class', 'fare', 'embark_town', 'alone']]) # look at selected columns
+# display 'survived','pclass', 'sex', 'age', 'sibsp', 'parch', 'class', 'fare', 'embark_town', 'alone']]) # look at selected columns
 td = titanic_data
 td.drop(['alive', 'who', 'adult_male', 'class', 'embark_town', 'deck'], axis=1, inplace=True)
 td.dropna(inplace=True) # drop rows with at least one missing value, after dropping unuseful columns
@@ -34,7 +34,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 dt = DecisionTreeClassifier(max_depth=5, class_weight='balanced')
 dt.fit(X_train, y_train)
 
-# Test the model
+# Test it
 y_pred = dt.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print('DecisionTreeClassifier Accuracy: {:.2%}'.format(accuracy))  
