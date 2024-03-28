@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-
+from sklearn.compose import ColumnTransformer
 # load in the carcrash data set
 car_crashes = sns.load_dataset('car_crashes')
 
@@ -13,7 +13,6 @@ car_crashes = sns.load_dataset('car_crashes')
 preprocessor = ColumnTransformer(
     transformers=[
         ('num', StandardScaler(), ['alcohol', 'not_distracted', 'no_previous', 'ins_premium', 'ins_losses']),
-      
     ])
 
 # define the model

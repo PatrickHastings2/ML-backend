@@ -19,7 +19,7 @@ def predict():
         return jsonify({'error': str(e)})
 
 # Register the blueprint with the Flask app
-app.register_blueprint(car_crash_api)
+# app.register_blueprint(car_crash_api)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -3,7 +3,8 @@ from flask import Flask, render_template, request, jsonify, Blueprint
 from flask.cli import AppGroup
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
+from sklearn.pipeline import *
+import pandas as pd
 # Import other necessary packages and modules
 
 from __init__ import app, db, cors  # Definitions initialization
@@ -13,7 +14,7 @@ from api.covid import covid_api
 from api.joke import joke_api
 from api.user import user_api
 from api.player import player_api
-from api.carcrashmodel import car_crash
+from api.carcrashapi import car_crash_api
 # Database migrations
 from model.users import initUsers
 from model.players import initPlayers
@@ -30,22 +31,20 @@ app.register_blueprint(covid_api)
 app.register_blueprint(user_api)
 app.register_blueprint(player_api)
 app.register_blueprint(app_projects)
-app.register_blueprint(car_crash)
+app.register_blueprint(car_crash_api)
 
 # Car Crash API Blueprint
-car_crash_api = Blueprint('car_crash_api', __name__, url_prefix='/api/car_crash')
 
-@car_crash_api.route('/predict', methods=['POST'])
-def predict():
-    try:
-        data = request.get_json(force=True)
-        features = pd.DataFrame(data, index=[0])
-        prediction = model.predict(features)
-        return jsonify({'prediction': prediction.tolist()})
-    except Exception as e:
-        return jsonify({'error': str(e)})
+# @car_crash_api.route('/predict', methods=['POST'])
+# def predict():
+#     try:
+#         data = request.get_json(force=True)
+#         features = pd.DataFrame(data, index=[0])
+#         prediction = model.predict(features)
+#         return jsonify({'prediction': prediction.tolist()})
+#     except Exception as e:
+#         return jsonify({'error': str(e)})
 
-app.register_blueprint(car_crash_api)  # Register the car crash API blueprint
 
 @app.errorhandler(404)
 def page_not_found(e):
